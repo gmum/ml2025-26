@@ -128,7 +128,7 @@ def check_02_linear_regression(lr_cls: Type) -> None:
     lr = lr_cls()
     lr.fit(input_dataset.data, input_dataset.target)
     returned = lr.predict(input_dataset.data)
-    expected = np.load(".checker/05/lr_diabetes.out.npz")["data"]
+    expected = np.load(f"{os.path.dirname(__file__)}/.checker/05/lr_diabetes.out.npz")["data"]
     assert np.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     loss = lr.loss(input_dataset.data, input_dataset.target)
@@ -147,7 +147,7 @@ def check_02_regularized_linear_regression(lr_cls: Type) -> None:
     lr.fit(input_dataset.data, input_dataset.target)
     returned = lr.predict(input_dataset.data)
     # np.savez_compressed(".checker/05/rlr_diabetes.out.npz", data=returned)
-    expected = np.load(".checker/05/rlr_diabetes.out.npz")["data"]
+    expected = np.load(f"{os.path.dirname(__file__)}/.checker/05/rlr_diabetes.out.npz")["data"]
     assert np.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     loss = lr.loss(input_dataset.data, input_dataset.target)
@@ -194,19 +194,19 @@ def check_04_logistic_reg(lr_cls: Type) -> None:
     lr = lr_cls(1)
     lr.fit(input_dataset.data, input_dataset.target, lr=1e-3, num_steps=int(1e4))
     returned = lr.predict(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_1d.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_1d.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     returned = lr.predict_proba(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_1d_proba.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_1d_proba.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     returned = lr.predict(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_1d_preds.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_1d_preds.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
@@ -216,19 +216,19 @@ def check_04_logistic_reg(lr_cls: Type) -> None:
     lr = lr_cls(2)
     lr.fit(input_dataset.data, input_dataset.target, lr=1e-2, num_steps=int(1e4))
     returned = lr.predict(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_2d.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_2d.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     returned = lr.predict_proba(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_2d_proba.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_2d_proba.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
 
     returned = lr.predict(input_dataset.data)
-    save_path = ".checker/04/lr_dataset_2d_preds.out.torch"
+    save_path = f"{os.path.dirname(__file__)}/.checker/04/lr_dataset_2d_preds.out.torch"
     # torch.save(returned, save_path)
     expected = torch.load(save_path)
     assert torch.allclose(expected, returned, rtol=1e-03, atol=1e-06), "Wrong prediction returned!"
